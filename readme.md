@@ -1,263 +1,170 @@
-# Backbone.Marionette
+# Marionette.Async
 
-Make your Backbone.js apps dance with a composite application architecture!
+Add async / deferred rendering and template loading to [Backbone.Marionette](https://github.com/derickbailey/backbone.marionette)
 
-## About Marionette
+## Download
 
-Backbone.Marionette is a composite application library for Backbone.js that
-aims to simplify the construction of large scale JavaScript applications. 
-It is a collection of common design and implementation patterns found in 
-the applications that I (Derick Bailey) have been building with Backbone, 
-and includes various pieces inspired by composite application architectures, 
-such as Microsoft's "Prism" framework. 
-
-### App Architecture On Backbone's Building Blocks
-
-Backbone provides a great set of building blocks for our JavaScript
-applications. It gives us the core constructs that are needed to build
-small apps, organize jQuery DOM events, or create single page apps that
-support mobile devices and large scale enterprise needs. But Backbone is
-not a complete framework. It's a set of building blocks. It leaves
-much of the application design, architecture and scalability to the 
-developer, including memory management, view management, and more.
-
-Marionette brings an application architecture to Backbone, along with
-built in view management and memory management. It's designed to be a 
-lightweight and flexible library of tools that sits on top of Backbone, 
-providing a framework for building scalable application.
-
-Like Backbone itself, you're not required to use all of Marionette just 
-because you want to use some of it. You can pick and choose which features 
-you want to use, when. This allows you to work with other Backbone 
-frameworks and plugins very easily. It also means that you are not required
-to engage in an all-or-nothing migration to begin using Marionette.
-
-### Key Benefits
-
-* Scale applications out with modular, event driven architecture
-* Sensible defaults, such as using Underscore templates for view rendering
-* Easy to modify to make it work with your applicaton's specific needs
-* Reduce boilerplate for views, with specialized view types
-* Build on a modular architecture with an `Application` and modules that attach to it
-* Compose your application's visuals at runtime, with `Region` and `Layout`
-* Nested views and layouts within visual regions
-* Built-in memory management and zombie killing in views, regions and layouts
-* Built-in event clean up with the `EventBinder`
-* Event-driven architecture with the `EventAggregator`
-* Flexible, "as-needed" architecture allowing you to pick and choose what you need
-* And much, much more
-
-## Donations
-
-Marionette needs your support, but not everyone can offer assitance 
-with code, bug submissions, and answering questions. If you're using 
-Marionette and you're finding that it is saving you as much time and 
-effort as I believe it does, then please consider financial support 
-for the project. 
-
-### Donate via PayPal 
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7SJHYWJ487SF4)
-
-### Donate via GitTip
-
-[GitTip](https://www.gittip.com/derickbailey)
-
-## Source Code And Downloads
-
-You can download the raw source code from the "src" folder above, or grab one of the
-many builds from the "lib" folder. 
-
-To get the latest stable release, use these links which point to the 'master' branch's
-builds:
+To add support for asynchronously loading templates and rendering views, 
+you need to download and include one of the following builds in your project:
 
 ### Standard Builds
 
-* Development: [backbone.marionette.js](https://raw.github.com/derickbailey/backbone.marionette/master/lib/backbone.marionette.js)
+Development: [backbone.marionette.async.js](https://raw.github.com/derickbailey/backbone.marionette.async/master/lib/backbone.marionette.async.js)
 
-* Production: [backbone.marionette.min.js](https://raw.github.com/derickbailey/backbone.marionette/master/lib/backbone.marionette.min.js)
+Production: [backbone.marionette.async.min.js](https://raw.github.com/derickbailey/backbone.marionette.async/master/lib/backbone.marionette.async.min.js)
 
-### RequireJS (AMD) Builds
+### AMD/RequireJS Builds
 
-* Development: [backbone.marionette.js](https://raw.github.com/derickbailey/backbone.marionette/master/lib/amd/backbone.marionette.js)
+Development: [backbone.marionette.async.js](https://raw.github.com/derickbailey/backbone.marionette.async/master/lib/amd/backbone.marionette.async.js)
 
-* Production: [backbone.marionette.min.js](https://raw.github.com/derickbailey/backbone.marionette/master/lib/amd/backbone.marionette.min.js)
-
-### Marionette.Async Add-on
-
-* Development: [backbone.marionette.async.js](https://raw.github.com/derickbailey/backbone.marionette/master/lib/backbone.marionette.async.js)
-
-* Production: [backbone.marionette.async.min.js](https://raw.github.com/derickbailey/backbone.marionette/master/lib/backbone.marionette.async.min.js)
-
-See the [async.md](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.async.md)
-documentation for more information.
-
-### Available Packages
-
-Marionette is unofficially available from various package
-management systems, such as RubyGems, Node Package Manager,
-Nuget, etc. These packages are maintained by the community
-and are not part of the core Backbone.Marionette code.
-
-##### [Available Packages](https://github.com/derickbailey/backbone.marionette/wiki/Available-packages)
+Production: [backbone.marionette.async.min.js](https://raw.github.com/derickbailey/backbone.marionette.async/master/lib/amd/backbone.marionette.async.min.js)
 
 ## Documentation
 
-The primary documentation is split up in to multiple files, due to the size
-of the over-all documentation. You can find these files in the 
-[/docs](https://github.com/derickbailey/backbone.marionette/tree/master/docs) folder, or use the links below to get straight to the
-documentation for each peice of Marionette.
+### Basic Usage
 
-### Marionette's Pieces
+To use Marionette.Async, you must include one of the above downloads in
+your project, after Marionette has been included:
 
-These are the strings that you can pull to make your puppet dance:
+```html
+<script src="/js/json2.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/underscore.js"></script>
+<script src="/js/backbone.js"></script>
+<script src="/js/backbone.marionette.js"></script>
 
-* [**Backbone.Marionette.Application**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.application.md): An application object that starts your app via initializers, and more
-* [**Backbone.Marionette.Application.module**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.application.module.md): Create modules and sub-modules within the application
-* [**Backbone.Marionette.AppRouter**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.approuter.md): Reduce your routers to nothing more than configuration
-* [**Backbone.Marionette.View**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.view.md): The base View type that other Marionette views extend from (not intended to be used directly)
-* [**Backbone.Marionette.ItemView**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.itemview.md): A view that renders a single item
-* [**Backbone.Marionette.CollectionView**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.collectionview.md): A view that iterates over a collection, and renders individual `ItemView` instances for each model
-* [**Backbone.Marionette.CompositeView**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.compositeview.md): A collection view and item view, for rendering leaf-branch/composite model hierarchies
-* [**Backbone.Marionette.Region**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.region.md): Manage visual regions of your application, including display and removal of content
-* [**Backbone.Marionette.Layout**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.layout.md): A view that renders a layout and creates region managers to manage areas within it
-* [**Backbone.Marionette.EventAggregator**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.eventaggregator.md): An extension of Backbone.Events, to be used as an event-driven or pub-sub tool
-* [**Backbone.Marionette.EventBinder**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.eventbinder.md): An event binding manager, to facilitate binding and unbinding of events
-* [**Backbone.Marionette.Renderer**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.renderer.md): Render templates with or without data, in a consistent and common manner
-* [**Backbone.Marionette.TemplateCache**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.templatecache.md): Cache templates that are stored in `<script>` blocks, for faster subsequent access
-* [**Backbone.Marionette.Callbacks**](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.callbacks.md): Manage a collection of callback methods, and execute them as needed
+<script src="/js/backbone.marionette.async.js"></script>
+```
 
-Please note that this is document is rather dry - it's meant to be a reference for
-those that just need a reference. If you're looking for an introduction and/or 
-examples on how to get started, please see [the Wiki](https://github.com/derickbailey/backbone.marionette/wiki).
+Once that has been included, several core functions on several of the
+Marionette objects will be overwritten with asynchronous counterparts.
 
-### Async / Deferred Rendering Support
+**Note that this is destructive change.** You cannot switch
+back and forth between sync/async objects. Once included in the page, all
+of the specified methods will run with async capabilities.
 
-Support for asynchronously rendering views, loading templates, etc has been
-removed from Marionette directly due to performance problems and overhead
-incurred. To get async support in Marionette, then, you need to download and
-include the the `backbone.marionette.async.js` or `async.min` file in 
-your project. See the above download links and the the 
-[async.md](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.async.md)
-documentation for more information.
+### Marionette.Async.Region
 
-##### [View The Async Documentation](https://github.com/derickbailey/backbone.marionette/blob/master/docs/marionette.async.md)
+The region manager `show` method takes advantage of jQuery's
+deferred cababilities, allowing for some very advanced techniques
+to be used for rendering views.
 
-### The Wiki: Sample Apps, Tutorials, And Much More
+To use a deferred, a view that is shown via a region manager
+must return a jQuery deferred object from the `render` method:
 
-A wiki is an important aspect of a thriving community, as it provides
-a place for the community to contribute ideas, examples, answer
-frequently asked questions, and more. If you're looking for
-community-driven information, examples that go beyond the
-dry technical documentation, or want to contribute your own
-ideas and examples to the community, please see the wiki page.
+```js
+DeferredView = Backbone.View.extend({
+  render: function(){
+    var that = this;
+    var data = this.serializeData();
+    var dfd = jQuery.Deferred();
 
-##### [View The Marionette Wiki](https://github.com/derickbailey/backbone.marionette/wiki)
+    this.getTemplate(function(template){
+      var html = that.renderTemplate(template, data);
 
-### Annotated Source Code
+      that.$el.html(html);
 
-In addition to this readme, I've commented the source code quite
-heavily and run it through Docco as part of my build process.
-This produces a nicely formatted, annotated source code as documenation
-file.
+      if (that.onRender){
+        that.onRender();
+      }
 
-You can read the annotated for all the detail of how Marionette works, and advice on which methods to override when.
+      dfd.resolve();
+    });
 
-##### [View the annotated source code](http://derickbailey.github.com/backbone.marionette/docs/backbone.marionette.html)
+    return dfd.promise();
+  }
+});
 
-## How To Contribute
+var view = new DeferredView();
+MyApp.mainRegion.show(view);
+```
 
-If you would like to contribute to Marionette's source code, please read
-the [guidelines for pull requests and contributions](https://github.com/derickbailey/backbone.marionette/wiki/Guidelines-for-pull-requests-and-contributions).
-Following these guidelines will help make your contributions easier to
-bring in to the next release.
+The region manager will wait until the deferred object is resolved
+before it attached the view's `el` to the DOM and displays it.
 
-## Help Is Just A Click Away
+### Marionette.Async.ItemView
 
-### [Google Group Mailing List](https://groups.google.com/forum/#!forum/backbone-marionette)
+The `render` method returns a jQuery deferred object, allowing
+you to know when the rendering completes. 
 
-Get announcements for new releases, share your projects and ideas that are
-using Marionette, and join in open-ended discussion that does not fit in
-to the Github issues list or StackOverflow Q&A.
+### Marionette.Async.CollectionView
 
-**For help with syntax, specific questions on how to implement a feature
-using Marionette, and other Q&A items, use StackOverflow.**
+The `render` method returns a jQuery deferred object, allowing
+you to know when the rendering completes. This deferred object
+is resolved after all of the child views have been rendered.
 
-### [StackOverflow](http://stackoverflow.com/questions/tagged/backbone.marionette)
+### Marionette.Async.CompositeView
 
-Ask questions about using Marionette in specific scenarios, with
-specific features. For example, help with syntax, understanding how a feature works and
-how to override that feature to do what you need or how to organize the
-different view types to work best with your applications needs.
+A composite view returns a jQuery deferred object from the
+`render` method. This allows you to know when the rendering for
+the entire composite structure has been completed.
 
-Questions on StackOverflow often turn in to blog posts and wiki entries.
+```js
+MyComp = Backbone.Marionette.CompositeView.extend({...});
 
-### [Github Issues](//github.com/derickbailey/backbone.marionette/issues)
+myComp = new MyComp().render().done(function(){
+  // the entire composite is now rendered. do stuff here
+});
+```
 
-Report issues with Marionette, submit pull requests to fix problems, or to
-create summarized and documented feature requests (preferably with pull
-requests that implement the feature).
+### Marionette.Async.TemplateCache
 
-**Please don't ask questions or seek help in the issues list.** There are
-other, better channels for seeking assistance, like StackOverflow and the
-Google Groups mailing list.
+The default template retrieval is to select the template contents
+from the DOM using jQuery. If you wish to change the way this
+works, you can override the `loadTemplate` method on the
+`TemplateCache` object.
 
-### [DerickBailey.LosTechies.com](http://derickbailey.lostechies.com)
+```js
+Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId, callback){
+  // load your template here, returning it or a deferred
+  // object that resolves with the template as the only param
+  var myTemplate = ...;
 
-Lastly, I blog about Marionette on a regular basis, at my
-LosTechies.com blog.
+  // send the template back
+  callback(myTemplate);
+}
+```
+
+For example, if you want to load templates asychronously from the
+server, instead of from the DOM, you could replace 
+`loadTemplate` function.
+
+If a "template.html" file exists on the server, with this in it:
+
+```html
+<script id="my-template" type="text/template">
+  <div>some template stuff</div>
+</script>
+```
+
+Then the `loadTemplate` implementation may look like this:
+
+```js
+Backbone.Marionette.TemplateCache.loadTemplate = function(templateId, callback){
+  var that = this;
+  var url = templateId + ".html";
+
+  $.get(url, function(templateHtml){
+    var template = $(templateHtml).find(templateId);
+    callback(template);
+  });
+}
+```
+
+This will use jQuery to asynchronously retrieve the template from
+the server. When the `get` completes, the callback function will
+select the template from the resulting HTML and then call the
+`callback` function to send it in to the template cache and allow
+it to be used for rendering.
 
 ## Compatibility And Requirements
 
-Theses libraries are required for the use, development, testing and
-documentation of Backbone.Marionette.
-
-### Runtime Requirements
-
-Backbone.Marionette currently works with the following versions of these 
-libraries:
-
-* Backbone v0.9.2
-* Underscore v1.3.3
-* jQuery v1.7.2
-
-While support for Zepto and Enderjs has been added, it is not officially
-tested against these libraries at this time.
-
-Marionette has not been tested against any other versions of these
-libraries. You may or may not have success if you use a version other
-than what it listed here.
-
-## Build Tools Used
-
-I use a number of tools to build, test and maintain Marionette, including
-but not limited to:
-
-### Grunt
-
-The [Grunt](https://github.com/cowboy/grunt) project is used
-to generate the builds for Backbone.Marionette. You can run the
-`build` file from a Linux/OSX terminal, or the `build.cmd` file for Windows 
-users, after installing grunt with NPM / NodeJS.
-
-### Test Suite
-
-Backbone.Marionette is also tested with the Jasmine JavaScript test utility,
-using the Jasmine Ruby gem. 
-
-To get the test suite up and running, you need a Ruby installation with the 
-latest RubyGems. Install the 'bundler' gem and then run 'bundle install' from 
-the project's root folder. Then run `rake jasmine` to run the test suite, and
-load up http://localhost:8888 to see the test suite in action.
-
-### Annotated Source Code
-
-I'm using [Docco](http://jashkenas.github.com/docco/) to generate the annotated source code.
+Marionette.Async currently works with [Backbone.Marionette](https://github.com/derickbailey/backbone.marionette) v0.9.11
 
 ## Release Notes
 
 For change logs and release notes, see the
-[changelog](https://github.com/derickbailey/backbone.marionette/blob/master/changelog.md) file.
+[changelog](https://github.com/derickbailey/backbone.marionette.async/blob/master/changelog.md) file.
 
 ## Legal Mumbo Jumbo (MIT License)
 
