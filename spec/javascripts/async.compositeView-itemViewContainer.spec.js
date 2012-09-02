@@ -1,29 +1,5 @@
 describe("async composite view - itemViewContainer", function(){
 
-  beforeEach(function(){
-    this.collectionRender = Backbone.Marionette.CollectionView.prototype.render;
-    this.collectionRenderItemView = Backbone.Marionette.CollectionView.prototype.renderItemView;
-    this.showCollection = Backbone.Marionette.CollectionView.prototype.showCollection;
-    this.showEmptyView = Backbone.Marionette.CollectionView.prototype.showEmptyView;
-
-    this.compositeRender = Backbone.Marionette.CompositeView.prototype.render;
-    this.compositeRenderCollection = Backbone.Marionette.CompositeView.prototype.renderCollection;
-
-    // replace the standard render with an async render
-    _.extend(Backbone.Marionette.CollectionView.prototype, Backbone.Marionette.Async.CollectionView);
-    _.extend(Backbone.Marionette.CompositeView.prototype, Backbone.Marionette.Async.CompositeView);
-  });
-
-  afterEach(function(){
-    Backbone.Marionette.CollectionView.prototype.render = this.collectionRender;
-    Backbone.Marionette.CollectionView.prototype.renderItemView = this.collectionRenderItemView;
-    Backbone.Marionette.CollectionView.prototype.showCollection = this.showCollection;
-    Backbone.Marionette.CollectionView.prototype.showEmptyView = this.showEmptyView;
-
-    Backbone.Marionette.CompositeView.prototype.render = this.compositeRender;
-    Backbone.Marionette.CompositeView.prototype.renderCollection = this.compositeRenderCollection
-  });
-
   var Model = Backbone.Model.extend({});
 
   var Collection = Backbone.Collection.extend({

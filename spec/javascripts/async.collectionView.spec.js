@@ -1,22 +1,5 @@
 describe("async collection view", function(){
 
-  beforeEach(function(){
-    this.render = Backbone.Marionette.CollectionView.prototype.render;
-    this.renderItemView = Backbone.Marionette.CollectionView.prototype.renderItemView;
-    this.showCollection = Backbone.Marionette.CollectionView.prototype.showCollection;
-    this.showEmptyView = Backbone.Marionette.CollectionView.prototype.showEmptyView;
-
-    // replace the standard render with an async render
-    _.extend(Backbone.Marionette.CollectionView.prototype, Backbone.Marionette.Async.CollectionView);
-  });
-
-  afterEach(function(){
-    Backbone.Marionette.CollectionView.prototype.render = this.render;
-    Backbone.Marionette.CollectionView.prototype.renderItemView = this.renderItemView;
-    Backbone.Marionette.CollectionView.prototype.showCollection = this.showCollection;
-    Backbone.Marionette.CollectionView.prototype.showEmptyView = this.showEmptyView;
-  });
-
   describe("when rendering a collection view", function(){
     var ItemView = Backbone.Marionette.ItemView.extend({
       tagName: "span",

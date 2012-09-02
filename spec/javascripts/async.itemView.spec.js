@@ -1,14 +1,4 @@
 describe("async item view", function(){
-  beforeEach(function(){
-    this.itemViewRender = Backbone.Marionette.ItemView.prototype.render;
-
-    // replace the standard render with an async render
-    _.extend(Backbone.Marionette.ItemView.prototype, Backbone.Marionette.Async.ItemView);
-  });
-
-  afterEach(function(){
-    Backbone.Marionette.ItemView.prototype.render = this.itemViewRender;
-  });
 
   describe("when rendering", function(){
     var OnRenderView = Backbone.Marionette.ItemView.extend({
