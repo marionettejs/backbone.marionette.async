@@ -15,36 +15,28 @@ module.exports = function(grunt) {
     },
 
     lint: {
-      files: ['src/backbone.marionette.js']
+      files: ['src/async.js', 'src/backbone.marionette.async.*.js']
     },
 
     rig: {
-      build: {
-        src: ['<banner:meta.banner>', 'src/backbone.marionette.js'],
-        dest: 'lib/backbone.marionette.js'
+      async: {
+        src: ['<banner:meta.banner>', 'src/async.js'],
+        dest: 'lib/backbone.marionette.async.js'
       },
       amd: {
         src: ['<banner:meta.banner>', 'src/amd.js'],
-        dest: 'lib/amd/backbone.marionette.js'
+        dest: 'lib/amd/backbone.marionette.async.js'
       },
-      async: {
-        src: ['<banner:meta.banner>', 'src/async/async.js'],
-        dest: 'lib/backbone.marionette.async.js'
-      }
     },
 
     min: {
-      standard: {
-        src: ['<banner:meta.banner>', '<config:rig.build.dest>'],
-        dest: 'lib/backbone.marionette.min.js'
+      async: {
+        src: ['<banner:meta.banner>', '<config:rig.async.dest>'],
+        dest: 'lib/backbone.marionette.async.min.js'
       },
       amd: {
         src: ['<banner:meta.banner>', '<config:rig.amd.dest>'],
         dest: 'lib/amd/backbone.marionette.min.js'
-      },
-      async: {
-        src: ['<banner:meta.banner>', '<config:rig.async.dest>'],
-        dest: 'lib/backbone.marionette.async.min.js'
       }
     },
 
@@ -81,13 +73,17 @@ module.exports = function(grunt) {
       globals: {
         jQuery: true,
         Backbone: true,
-        _: true
+        _: true,
+        Async: true,
+        $: true,
+        Marionette: true,
+        callDeferredMethod: true
       }
     },
     uglify: {}
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint rig min');
+  grunt.registerTask('default', 'rig lint min');
 
 };

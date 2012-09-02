@@ -38,4 +38,4 @@ Async.CompositeView = {
     });
     return collectionDeferred.promise();
   }
-}
+};

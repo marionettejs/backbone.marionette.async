@@ -14,7 +14,7 @@
   } 
 }(this, function ($, _, Backbone) {
 
-  //= backbone.marionette.js
-  return Backbone.Marionette; 
+  //= backbone.marionette.async.js
+  return Backbone.Marionette.Async; 
 
 }));

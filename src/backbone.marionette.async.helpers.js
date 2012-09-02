@@ -10,4 +10,4 @@ var callDeferredMethod = function(fn, callback, context){
   var promise;
   if (fn) { promise = fn.call(context); }
   $.when(promise).then(_.bind(callback, context));
-}
+};

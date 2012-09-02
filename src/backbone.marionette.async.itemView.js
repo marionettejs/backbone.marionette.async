@@ -17,25 +17,25 @@ Async.ItemView = {
 
       var deferredData = that.serializeData();
       $.when(deferredData).then(dataSerialized);
-    } 
+    };
 
     var dataSerialized = function(data){
       var template = that.getTemplate();
       var asyncRender = Marionette.Renderer.render(template, data);
       $.when(asyncRender).then(templateRendered);
-    }
+    };
 
     var templateRendered = function(html){
       that.$el.html(html);
       callDeferredMethod(that.onRender, onRenderDone, that);
-    }
+    };
 
     var onRenderDone = function(){
       that.trigger("render", that);
       that.trigger("item:rendered", that);
 
       deferredRender.resolve();
-    }
+    };
 
     callDeferredMethod(this.beforeRender, beforeRenderDone, this);
 

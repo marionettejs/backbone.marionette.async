@@ -68,4 +68,4 @@ Async.CollectionView = {
     });
     return viewRendered;
   }
-}
+};

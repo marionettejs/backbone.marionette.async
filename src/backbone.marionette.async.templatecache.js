@@ -99,4 +99,3 @@ _.extend(Async.TemplateCache.prototype, {
     return _.template(rawTemplate);
   }
 });
-
