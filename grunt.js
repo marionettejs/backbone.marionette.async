@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       },
       amd: {
         src: ['<banner:meta.banner>', '<config:rig.amd.dest>'],
-        dest: 'lib/amd/backbone.marionette.min.js'
+        dest: 'lib/amd/backbone.marionette.async.min.js'
       }
     },
 
