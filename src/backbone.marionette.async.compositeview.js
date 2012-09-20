@@ -29,6 +29,17 @@ Async.CompositeView = {
 
     return compositeRendered.promise();
   },
+  
+  //Deferred render of the model
+  renderModel: function() {
+    var that = this;
+    var deferredData = $.when(this.serializeData());
+    var deferredRender = deferredData.pipe(function(data){
+      var template = that.getTemplate();
+      return Marionette.Renderer.render(template,data);
+    });
+    return deferredRender;
+  },
 
   // Render the collection for the composite view
   renderCollection: function(){
