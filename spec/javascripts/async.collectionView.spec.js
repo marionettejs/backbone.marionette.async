@@ -11,7 +11,7 @@ describe("async collection view", function(){
     var CollectionView = Backbone.Marionette.CollectionView.extend({
       itemView: ItemView,
 
-      beforeRender: function(){},
+      onBeforeRender: function(){},
 
       onRender: function(){}
     });
@@ -26,7 +26,7 @@ describe("async collection view", function(){
       });
 
       spyOn(collectionView, "onRender").andCallThrough();
-      spyOn(collectionView, "beforeRender").andCallThrough();
+      spyOn(collectionView, "onBeforeRender").andCallThrough();
       spyOn(collectionView, "trigger").andCallThrough();
       spyOn(collectionView, "appendHtml").andCallThrough();
 
@@ -47,8 +47,8 @@ describe("async collection view", function(){
       expect(_.size(collectionView.children)).toBe(2);
     });
 
-    it("should call 'beforeRender' before rendering", function(){
-      expect(collectionView.beforeRender).toHaveBeenCalled();
+    it("should call 'onBeforeRender' before rendering", function(){
+      expect(collectionView.onBeforeRender).toHaveBeenCalled();
     });
 
     it("should call 'onRender' after rendering", function(){
