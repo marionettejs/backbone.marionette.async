@@ -9,8 +9,8 @@ module.exports = function(grunt) {
     meta: {
       version: '0.2.0',
       banner: '// Backbone.Marionette.Async, v<%= meta.version %>\n' +
-        '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' + 
-        '// Distributed under MIT license\n' + 
+        '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
+        '// Distributed under MIT license\n' +
         '// http://github.com/derickbailey/backbone.marionette.async'
     },
 

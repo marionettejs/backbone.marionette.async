@@ -7,32 +7,38 @@
 // and `jQuery.when(...).then(...)` to manage async calls.
 Async.ItemView = {
   render: function(){
-    var that = this;
+    var that = this,
+        deferredRender = $.Deferred();
 
-    var deferredRender = $.Deferred();
+    this.isClosed = false;
 
     var beforeRenderDone = function() {
-      that.trigger("before:render", that);
-      that.trigger("item:before:render", that);
+      that.triggerMethod("before:render", that);
+      that.triggerMethod("item:before:render", that);
 
       var deferredData = that.serializeData();
       $.when(deferredData).then(dataSerialized);
     };
 
     var dataSerialized = function(data){
-      var template = that.getTemplate();
-      var asyncRender = Marionette.Renderer.render(template, data);
+      var template = that.getTemplate(),
+          asyncRender;
+
+      data = that.mixinTemplateHelpers(data);
+
+      asyncRender = Marionette.Renderer.render(template, data);
       $.when(asyncRender).then(templateRendered);
     };
 
     var templateRendered = function(html){
       that.$el.html(html);
+      this.bindUIElements();
       callDeferredMethod(that.onRender, onRenderDone, that);
     };
 
     var onRenderDone = function(){
-      that.trigger("render", that);
-      that.trigger("item:rendered", that);
+      that.triggerMethod("render", that);
+      that.triggerMethod("item:rendered", that);
 
       deferredRender.resolve();
     };

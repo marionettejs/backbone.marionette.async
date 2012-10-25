@@ -5,8 +5,8 @@
 // to be rendered before swaping it in.
 Async.Region = {
   show: function(view){
-    var that = this;
-    var asyncShow = $.Deferred();
+    var that = this,
+        asyncShow = $.Deferred();
 
     this.ensureEl();
     this.close();
@@ -16,11 +16,11 @@ Async.Region = {
       that.open(view);
 
       if (view.onShow) { view.onShow(); }
-      view.trigger("show");
+      view.triggerMethod("show");
 
       if (that.onShow) { that.onShow(view); }
-      that.trigger("view:show", view);
-      
+      that.triggerMethod("show", view);
+
       asyncShow.resolve();
     });
 
