@@ -15,11 +15,8 @@ Async.Region = {
     $.when(view.render()).then(function () {
       that.open(view);
 
-      if (view.onShow) { view.onShow(); }
-      view.triggerMethod("show");
-
-      if (that.onShow) { that.onShow(view); }
-      that.triggerMethod("show", view);
+      Marionette.triggerMethod.call(view, "show");
+      Marionette.triggerMethod.call(that, "show", view);
 
       asyncShow.resolve();
     });
