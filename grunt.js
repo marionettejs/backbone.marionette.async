@@ -7,11 +7,14 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     meta: {
-      version: '0.2.0',
+      version: '0.3.0',
       banner: '// Backbone.Marionette.Async, v<%= meta.version %>\n' +
         '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
         '// Distributed under MIT license\n' +
-        '// http://github.com/derickbailey/backbone.marionette.async'
+        '// http://github.com/marionettejs/backbone.marionette.async' +
+        '//' +
+        '// Backbone.Marionette.Async updated to 1.0.0 Beta 3 code base by Jeremy McLeod' +
+        '// http://github.com/isochronous'
     },
 
     lint: {

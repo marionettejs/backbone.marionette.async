@@ -165,7 +165,7 @@ Marionette.Async currently works with [Backbone.Marionette](https://github.com/m
 ## Release Notes
 
 For change logs and release notes, see the
-[changelog](https://github.com/derickbailey/backbone.marionette.async/blob/master/changelog.md) file.
+[changelog](https://github.com/marionettejs/backbone.marionette.async/blob/master/changelog.md) file.
 
 ## Legal Mumbo Jumbo (MIT License)
 
