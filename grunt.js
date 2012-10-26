@@ -11,9 +11,9 @@ module.exports = function(grunt) {
       banner: '// Backbone.Marionette.Async, v<%= meta.version %>\n' +
         '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
         '// Distributed under MIT license\n' +
-        '// http://github.com/marionettejs/backbone.marionette.async' +
-        '//' +
-        '// Backbone.Marionette.Async updated to 1.0.0 Beta 3 code base by Jeremy McLeod' +
+        '// http://github.com/marionettejs/backbone.marionette.async\n' +
+        '//\n' +
+        '// Backbone.Marionette.Async updated to 1.0.0 Beta 3 code base by Jeremy McLeod\n' +
         '// http://github.com/isochronous'
     },
 
