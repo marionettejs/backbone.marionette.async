@@ -4,7 +4,7 @@ Add async / deferred rendering and template loading to [Backbone.Marionette](htt
 
 ## Download
 
-To add support for asynchronously loading templates and rendering views, 
+To add support for asynchronously loading templates and rendering views,
 you need to download and include one of the following builds in your project:
 
 ### Standard Builds
@@ -85,7 +85,7 @@ before it attached the view's `el` to the DOM and displays it.
 ### Marionette.Async.ItemView
 
 The `render` method returns a jQuery deferred object, allowing
-you to know when the rendering completes. 
+you to know when the rendering completes.
 
 ### Marionette.Async.CollectionView
 
@@ -126,7 +126,7 @@ Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId, 
 ```
 
 For example, if you want to load templates asychronously from the
-server, instead of from the DOM, you could replace 
+server, instead of from the DOM, you could replace
 `loadTemplate` function.
 
 If a "template.html" file exists on the server, with this in it:
@@ -159,12 +159,13 @@ it to be used for rendering.
 
 ## Compatibility And Requirements
 
-Marionette.Async currently works with [Backbone.Marionette](https://github.com/derickbailey/backbone.marionette) v0.9.11
+Marionette.Async currently works with [Backbone.Marionette](https://github.com/marionettejs/backbone.marionette) v1.0
+.0 Beta 3
 
 ## Release Notes
 
 For change logs and release notes, see the
-[changelog](https://github.com/derickbailey/backbone.marionette.async/blob/master/changelog.md) file.
+[changelog](https://github.com/marionettejs/backbone.marionette.async/blob/master/changelog.md) file.
 
 ## Legal Mumbo Jumbo (MIT License)
 

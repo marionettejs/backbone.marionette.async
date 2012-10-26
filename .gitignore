@@ -2,6 +2,7 @@
 *.swp
 *.swo
 *.orig
+.idea/
 tmp/
 ext/
 node_modules/

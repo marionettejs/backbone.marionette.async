@@ -6,16 +6,19 @@ Async.CompositeView = {
   // this again will tell the model's view to re-render itself
   // but the collection will not re-render.
   render: function(){
-    var that = this;
-    var compositeRendered = $.Deferred();
+    var that = this,
+        compositeRendered = $.Deferred(),
+        modelIsRendered;
+
+    this.isClosed = false;
 
     this.resetItemViewContainer();
 
-    var modelIsRendered = this.renderModel();
+    modelIsRendered = this.renderModel();
     $.when(modelIsRendered).then(function(html){
       that.$el.html(html);
-      that.trigger("composite:model:rendered");
-      that.trigger("render");
+      this.bindUIElements();
+      that.triggerMethod("composite:model:rendered");
 
       var collectionIsRendered = that.renderCollection();
       $.when(collectionIsRendered).then(function(){
@@ -24,7 +27,7 @@ Async.CompositeView = {
     });
 
     compositeRendered.done(function(){
-      that.trigger("composite:rendered");
+      that.triggerMethod("composite:rendered");
     });
 
     return compositeRendered.promise();
@@ -34,7 +37,7 @@ Async.CompositeView = {
   renderCollection: function(){
     var collectionDeferred = Marionette.CollectionView.prototype.render.apply(this, arguments);
     collectionDeferred.done(function(){
-      this.trigger("composite:collection:rendered");
+      this.triggerMethod("composite:collection:rendered");
     });
     return collectionDeferred.promise();
   }

@@ -4,9 +4,12 @@
 // provides async rendering for collection views
 Async.CollectionView = {
   render: function(){
-    var that = this;
-    var deferredRender = $.Deferred();
-    var promises;
+
+    var that = this,
+        deferredRender = $.Deferred(),
+        promises;
+
+    this.isClosed = false;
 
     this.triggerBeforeRender();
 
@@ -30,14 +33,14 @@ Async.CollectionView = {
 
     return deferredRender.promise();
   },
-  
+
   // Internal method to loop through each item in the
   // collection view and show it
   showCollection: function(){
-    var that = this;
-    var promises = [];
+    var that = this,
+        promises = [],
+        ItemView = this.getItemView();
 
-    var ItemView = this.getItemView();
     this.collection.each(function(item, index){
       var promise = that.addItemView(item, ItemView, index);
       promises.push(promise);
@@ -50,16 +53,18 @@ Async.CollectionView = {
   // a collection of item views, when the collection is
   // empty
   showEmptyView: function(promises){
-    var promise;
-    var EmptyView = this.options.emptyView || this.emptyView;
+    var promise,
+        EmptyView = this.options.emptyView || this.emptyView;
+
     if (EmptyView && !this._showingEmptyView){
+      var model;
       this._showingEmptyView = true;
-      var model = new Backbone.Model();
+      model = new Backbone.Model();
       promise = this.addItemView(model, EmptyView, 0);
     }
     return promise;
   },
-  
+
   renderItemView: function(view, index) {
     var that = this;
     var viewRendered = view.render();

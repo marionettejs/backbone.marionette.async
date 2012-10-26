@@ -5,8 +5,8 @@
 // to be rendered before swaping it in.
 Async.Region = {
   show: function(view){
-    var that = this;
-    var asyncShow = $.Deferred();
+    var that = this,
+        asyncShow = $.Deferred();
 
     this.ensureEl();
     this.close();
@@ -15,12 +15,9 @@ Async.Region = {
     $.when(view.render()).then(function () {
       that.open(view);
 
-      if (view.onShow) { view.onShow(); }
-      view.trigger("show");
+      Marionette.triggerMethod.call(view, "show");
+      Marionette.triggerMethod.call(that, "show", view);
 
-      if (that.onShow) { that.onShow(view); }
-      that.trigger("view:show", view);
-      
       asyncShow.resolve();
     });
 
