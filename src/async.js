@@ -27,4 +27,4 @@ Backbone.Marionette.Async = (function(Backbone, Marionette, _, $){
 //= async.init.js
   
   return Async;
-})(Backbone, Backbone.Marionette, _, window.jQuery || window.Zepto || window.ender);
+})(Backbone, Backbone.Marionette, _, $ || window.jQuery || window.Zepto || window.ender);
