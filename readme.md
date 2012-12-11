@@ -1,6 +1,28 @@
-# Marionette.Async
+# Marionette.Async: Deprecated
 
 Add async / deferred rendering and template loading to [Backbone.Marionette](https://github.com/derickbailey/backbone.marionette)
+
+## Deprecation Notice
+
+**Marionette.Async is no longer supported by the Marionette developers
+or maintainers.**
+
+After much discussion we decided the cost and complexities that 
+Marionette.Async introduced were too high. The patterns that were used
+in Async to facilitate the asynchronous loading of data, loading of
+templates, rendering and other features were at a cost of performance
+in the application, simplicity in the code, and maintainability in
+moving forward.
+
+Marionette.Async will no longer be updated. No issues will be fixed
+and no release will be made with Marionette v1.0. 
+
+If you wish to continue using Marionette.Async, you can fork this 
+project and maintain it as you see fit.
+
+Thanks,
+
+  -- The Marionette Core Team
 
 ## Download
 
