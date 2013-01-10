@@ -5,40 +5,48 @@ Async.CompositeView = {
   // Renders the model once, and the collection once. Calling
   // this again will tell the model's view to re-render itself
   // but the collection will not re-render.
-  render: function(){
-    var that = this,
-        compositeRendered = $.Deferred(),
-        modelIsRendered;
+    render: function() {
+        var that = this,
+            compositeRendered = $.Deferred();
 
-    this.isClosed = false;
+        this.isClosed = false;
 
-    this.resetItemViewContainer();
+        this.resetItemViewContainer();
 
-    modelIsRendered = this.renderModel();
-    $.when(modelIsRendered).then(function(html){
-      that.$el.html(html);
-      this.bindUIElements();
-      that.triggerMethod("composite:model:rendered");
+        var modelIsRendered = this.renderModel();
 
-      var collectionIsRendered = that.renderCollection();
-      $.when(collectionIsRendered).then(function(){
-        compositeRendered.resolve();
-      });
-    });
+        $.when(modelIsRendered).then(function(html) {
+            that.$el.html(html);
+            that.bindUIElements();
+            that.triggerMethod("composite:model:rendered");
 
-    compositeRendered.done(function(){
-      that.triggerMethod("composite:rendered");
-    });
+            var collectionIsRendered = that.renderCollection();
+            $.when(collectionIsRendered).then(function() {
+                compositeRendered.resolve();
+            });
+        });
 
-    return compositeRendered.promise();
-  },
+        compositeRendered.done(function() {
+            that.triggerMethod("composite:rendered");
+        });
 
-  // Render the collection for the composite view
-  renderCollection: function(){
-    var collectionDeferred = Marionette.CollectionView.prototype.render.apply(this, arguments);
-    collectionDeferred.done(function(){
-      this.triggerMethod("composite:collection:rendered");
-    });
-    return collectionDeferred.promise();
-  }
+        return compositeRendered.promise();
+    },
+
+    // Modified: Had to add an override for renderModel because it
+    // sends the wrong parameters to Renderer.render
+    renderModel: function() {
+        var speck = this.getTemplate();
+        return Marionette.Renderer.render(speck, this);
+    },
+
+    // Render the collection for the composite view
+    renderCollection: function() {
+        var args = Array.prototype.slice.apply(arguments);
+        var collectionDeferred = Marionette.CollectionView.prototype.render.apply(this, args);
+        collectionDeferred.done(function() {
+            this.triggerMethod("composite:collection:rendered");
+        });
+        return collectionDeferred.promise();
+    }
 };

@@ -6,45 +6,47 @@
 // `onRender` functions are all asynchronous, using `jQuery.Deferred()`
 // and `jQuery.when(...).then(...)` to manage async calls.
 Async.ItemView = {
-  render: function(){
-    var that = this,
-        deferredRender = $.Deferred();
+    render: function(options) {
+        var that = this,
+            deferredRender = $.Deferred();
 
-    this.isClosed = false;
+        options = options || {};
 
-    var beforeRenderDone = function() {
-      that.triggerMethod("before:render", that);
-      that.triggerMethod("item:before:render", that);
+        this.isClosed = false;
 
-      var deferredData = that.serializeData();
-      $.when(deferredData).then(dataSerialized);
-    };
+        var beforeRenderDone = function() {
+            that.triggerMethod("before:render", that);
+            that.triggerMethod("item:before:render", that);
 
-    var dataSerialized = function(data){
-      var template = that.getTemplate(),
-          asyncRender;
+            var template = that.getTemplate();
+            var asyncRender = Marionette.Renderer.render(template, that, options);
+            $.when(asyncRender).then(templateRendered);
+        };
 
-      data = that.mixinTemplateHelpers(data);
+        // FIX: removed the dataSerialized function, because speck handles serializing our data for us
+        // in most cases
+        var templateRendered = function(html) {
+            //If either of these are true then $el's HTML has already been updated
+            if (!options.update) {
+                that.$el.html(html);
+            }
+            that.bindUIElements();
+            // FIX: don't need this anymore with triggerMethod()
+            onRenderDone();
+        };
 
-      asyncRender = Marionette.Renderer.render(template, data);
-      $.when(asyncRender).then(templateRendered);
-    };
+        var onRenderDone = function() {
+            that.triggerMethod("render", that);
+            that.triggerMethod("item:rendered", that);
 
-    var templateRendered = function(html){
-      that.$el.html(html);
-      this.bindUIElements();
-      callDeferredMethod(that.onRender, onRenderDone, that);
-    };
+            deferredRender.resolve();
+        };
 
-    var onRenderDone = function(){
-      that.triggerMethod("render", that);
-      that.triggerMethod("item:rendered", that);
+        // FIX: this.beforeRender should be handled by that.triggerMethod
+        // "before:render" now, so no need to defer the call like the previous
+        // code here did
+        beforeRenderDone();
 
-      deferredRender.resolve();
-    };
-
-    callDeferredMethod(this.beforeRender, beforeRenderDone, this);
-
-    return deferredRender.promise();
-  }
+        return deferredRender.promise();
+    }
 };
