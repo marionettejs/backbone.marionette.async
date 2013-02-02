@@ -14,6 +14,7 @@ Async.CompositeView = {
     var modelIsRendered = this.renderModel();
     $.when(modelIsRendered).then(function(html){
       that.$el.html(html);
+      that.bindUIElements();
       that.trigger("composite:model:rendered");
       that.trigger("render");
 

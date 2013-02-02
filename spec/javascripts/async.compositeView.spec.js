@@ -33,6 +33,7 @@ describe("async composite view", function(){
 
       spyOn(compositeView, "trigger").andCallThrough();
       spyOn(compositeView, "onRender").andCallThrough();
+      spyOn(compositeView, "bindUIElements").andCallThrough();
 
       var deferred = compositeView.render();
       
@@ -61,6 +62,10 @@ describe("async composite view", function(){
 
     it("should call 'onRender'", function(){
       expect(compositeView.onRender).toHaveBeenCalled();
+    });
+
+    it("should call 'bindUIElements'", function(){
+      expect(compositeView.bindUIElements).toHaveBeenCalled();
     });
 
     it("should resolve the rendering deferred", function(){
