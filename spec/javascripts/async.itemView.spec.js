@@ -2,9 +2,14 @@ describe("async item view", function(){
 
   describe("when rendering", function(){
     var OnRenderView = Backbone.Marionette.ItemView.extend({
-      template: "#emptyTemplate",
+      template: "#itemWithHelpersTemplate",
       beforeRender: function(){},
-      onRender: function(){}
+      onRender: function(){},
+      templateHelpers: function(data) {
+          return {
+              helperData: 'SOME HELPER DATA'
+          };
+      }
     });
 
     var view;
@@ -12,7 +17,7 @@ describe("async item view", function(){
     var deferredDone;
 
     beforeEach(function(){
-      loadFixtures("emptyTemplate.html");
+      loadFixtures("itemWithHelpersTemplate.html");
       view = new OnRenderView({});
       
       spyOn(view, "beforeRender").andCallThrough();

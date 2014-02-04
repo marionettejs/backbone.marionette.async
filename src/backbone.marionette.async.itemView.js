@@ -16,6 +16,7 @@ Async.ItemView = {
       that.trigger("item:before:render", that);
 
       var deferredData = that.serializeData();
+      deferredData = that.mixinTemplateHelpers(deferredData);
       $.when(deferredData).then(dataSerialized);
     };
 
