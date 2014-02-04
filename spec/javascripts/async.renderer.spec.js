@@ -30,7 +30,7 @@ describe("async renderer", function(){
       loadFixtures("rendererWithDataTemplate.html");
       spyOn(Backbone.Marionette.TemplateCache, "get").andCallThrough();
 
-      var data = {foo: "bar"}
+      var data = {foo: "bar"};
       var promise = Backbone.Marionette.Renderer.render(templateSelector, data);
 
       promise.done(function(html){
@@ -80,6 +80,35 @@ describe("async renderer", function(){
     it("should render the view with the overridden method", function(){
       expect(result).toHaveText("custom");
     });
+  });
+
+  describe("when a template function is provided", function(){
+    var templateSpy = {
+      fn: function() { return "<foo>template func</foo>"; }
+    };
+    var data = {foo: "bar"};
+
+    beforeEach(function(){
+      spyOn(Backbone.Marionette.TemplateCache, "get").andCallThrough();
+      spyOn(templateSpy, "fn").andCallThrough();
+
+      var promise = Backbone.Marionette.Renderer.render(templateSpy.fn, data);
+
+      promise.done(function(html){
+        result = $(html);
+      });
+
+    });
+
+    it("should call the template function", function(){
+      expect(templateSpy.fn).toHaveBeenCalledWith(data);
+      expect(result).toHaveText("template func");
+    });
+
+    it("should not use the template cache", function(){
+      expect(Backbone.Marionette.TemplateCache.get).not.toHaveBeenCalled();
+    });
+
   });
 
 });

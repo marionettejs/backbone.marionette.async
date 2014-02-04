@@ -12,11 +12,20 @@ Async.Renderer = {
   render: function(template, data){
     var asyncRender = $.Deferred();
 
-    var templateRetrieval = Marionette.TemplateCache.get(template);
-    $.when(templateRetrieval).then(function(templateFunc){
-      var html = templateFunc(data);
-      asyncRender.resolve(html);
-    });
+    var doRender = function(templateFunc) {
+      asyncRender.resolve(templateFunc(data));
+    };
+
+    if(_.isFunction(template)) {
+      // If we are passed a template function, just call it directly
+      doRender(template);
+    } else {
+      // Otherwise, fetch the template using the template cache and then render
+      var templateRetrieval = Marionette.TemplateCache.get(template);
+      $.when(templateRetrieval).then(function(templateFunc){
+        doRender(templateFunc);
+      });
+    }
 
     return asyncRender.promise();
   }
